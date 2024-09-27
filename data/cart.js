@@ -15,20 +15,21 @@ function saveToStorage(){
 }// cart ko local storage mein save so that refresh krne ke baad wapis default top wli cart na ajae
 export function addToCart(productId){
   let matchingItem;
-  
+  const quantitySelector=document.querySelector(`.js-quantity-selector-${productId}`);
+  const quantity=Number(quantitySelector.value);
   cart.forEach((cartItem)=>{
     if(cartItem.productId===productId) matchingItem=cartItem;
   });
 
   if(matchingItem)
   {
-    matchingItem.quantity+=1;
+    matchingItem.quantity+=quantity;  //if already present AND by default dom se string aata isliye number convert 
   }
   else
   {
     cart.push({
       productId: productId,
-      quantity:1
+      quantity:quantity // jitni quantity select kiya h
     });
   }
 
